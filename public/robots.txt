@@ -1,5 +1,5 @@
 User-agent: *
 Disallow: /admin/
 
-Sitemap: https://mangachimp.com/chapter-sitemap1.xml
-Sitemap: https://mangachimp.com/manga-sitemap.xml
+Sitemap: https://abc.com/chapter-sitemap1.xml
+Sitemap: https://abc.com/manga-sitemap.xml

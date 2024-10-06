@@ -66,6 +66,11 @@ const roboto2 = Rubik({ subsets: ['latin'], weight: '400', });
 const roboto3 = Rubik({ subsets: ['latin'], weight: '600', });
 register();
 import { useRouter } from 'next/router';
+
+import dynamic from 'next/dynamic';
+const MyDynamicComp = dynamic(() => import('@/components/MyDynamicComp'), { ssr: false });
+
+
 export const runtime = 'experimental-edge';
 
 
@@ -119,7 +124,7 @@ export default function Home({ mangas, categories, latestmangachapters }) {
         "@type": "CollectionPage",
         "@id": `${DOMAIN}/#webpage`,
         "url": `${DOMAIN}`,
-        "name": `${APP_NAME}: The Ultimate Destination For Reading Mangas`,
+        "name": `${APP_NAME}: Read Mangas, Manhwas, Manhuas`,
         "about": { "@id": `${DOMAIN}/#person` },
         "isPartOf": { "@id": `${DOMAIN}/#website` },
         "inLanguage": "en-US"
@@ -137,7 +142,7 @@ export default function Home({ mangas, categories, latestmangachapters }) {
   const head = () => (
     <Head>
 
-      <title>{`${APP_NAME}: The Ultimate Destination For Reading Manga, Manhwa, Manhua, WebComic, Novels`}</title>
+      <title>{`${APP_NAME}: Read Mangas, Manhwas, Manhuas`}</title>
       <meta name="description" content={DESCRIPTION} />
       <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large" />
       {/* {metatags && metatags?.map((metaTag, index) => (
@@ -149,7 +154,7 @@ export default function Home({ mangas, categories, latestmangachapters }) {
       <meta property="og:locale" content="en_US" />
       <meta property="og:type" content="website" />
       <link rel="canonical" href={`${DOMAIN}`} />
-      <meta property="og:title" content={`${APP_NAME}: The Ultimate Destination For Reading Manga, Manhwa, Manhua, WebComic, Novels`} />
+      <meta property="og:title" content={`${APP_NAME}: Read Mangas, Manhwas, Manhuas`} />
       <meta property="og:description" content={DESCRIPTION} />
       <meta property="og:type" content="webiste" />
       <meta property="og:url" content={`${DOMAIN}`} />
@@ -187,60 +192,63 @@ export default function Home({ mangas, categories, latestmangachapters }) {
 
 
       <h1 className={`${roboto.className}  text-[white] tracking-wider font-extrabold text-2xl px-3 text-center my-10`}>
-        {`${APP_NAME}: The Ultimate Destination For Reading Mangas`}
+        {`${APP_NAME}: Read Mangas, Manhwas, Manhuas`}
       </h1>
 
 
-      <Swiper loop={true} centeredSlides={true}
-        autoplay={{ delay: 2500, disableOnInteraction: false }}
-        pagination={{ clickable: true }}
-        modules={[Autoplay, Pagination, Navigation]} className="mySwiper" >
+      <MyDynamicComp>
+        <div>
+          <Swiper loop={true} centeredSlides={true}
+            autoplay={{ delay: 2500, disableOnInteraction: false }}
+            pagination={{ clickable: true }}
+            modules={[Autoplay, Pagination, Navigation]} className="mySwiper" >
 
-        {mangas?.map((manga, index) => (
-          <SwiperSlide key={index}>
-            <div className={`${roboto2.className} bg-[black] max-w-[1150px] shadow mx-auto md:h-[420px] rounded-lg overflow-hidden  text-white border border-[#2c2b2b]`}>
-              <div className="md:flex gap-28 justify-center cursor-pointer">
-                <div className="flex justify-center md:block sm:pt-0 pt-3">
-                  <Link prefetch={false} href={`${DOMAIN}/manga/${manga?.slug}`}>
-                    <img src={`${IMAGES_SUBDOMAIN}/${manga?.slug}/cover-image/1.webp`} alt={manga?.fullname} className="hover:scale-105 transition-transform sm:h-[420px] h-[300px]" />
-                  </Link>
-                </div>
+            {mangas?.map((manga, index) => (
+              <SwiperSlide key={index}>
+                <div className={`${roboto2.className} bg-[black] max-w-[1150px] shadow mx-auto md:h-[420px] rounded-lg overflow-hidden  text-white border border-[#2c2b2b]`}>
+                  <div className="md:flex gap-28 justify-center cursor-pointer">
+                    <div className="flex justify-center md:block sm:pt-0 pt-3">
+                      <Link prefetch={false} href={`${DOMAIN}/manga/${manga?.slug}`}>
+                        <img src={`${IMAGES_SUBDOMAIN}/${manga?.slug}/cover-image/1.webp`} alt={manga?.fullname} className="hover:scale-105 transition-transform sm:h-[420px] h-[300px]" />
+                      </Link>
+                    </div>
 
-                <div className="p-4 flex-1">
-                  <Link prefetch={false} href={`${DOMAIN}/manga/${manga?.slug}`}>
-                    <h2 className={`${roboto.className} text-2xl font-bold text-center tracking-wider md:text-left`}>{manga?.fullname}</h2>
-                  </Link>
+                    <div className="p-4 flex-1">
+                      <Link prefetch={false} href={`${DOMAIN}/manga/${manga?.slug}`}>
+                        <h2 className={`${roboto.className} text-2xl font-bold text-center tracking-wider md:text-left`}>{manga?.fullname}</h2>
+                      </Link>
 
-                  <p className="text-[15px] mt-5 md:pr-5 text-center md:text-left leading-[1.7]">{`${manga?.description}`}</p>
+                      <p className="text-[15px] mt-5 md:pr-5 text-center md:text-left leading-[1.7]">{`${manga?.description}`}</p>
 
 
-                  <div className='max-w-[600px] mx-auto md:mx-0'>
-                    <div className="flex flex-wrap md:justify-start justify-center gap-4 mt-10 mb-5">
-                      {manga?.categories?.map((category, index) => (
-                        <Link prefetch={false} key={index} href={`${DOMAIN}/categories/${category?.slug}?page=1`} className="bg-[black] border border-[#2e2e2e] hover:bg-[#2c2b2b] hover:scale-110 transition-transform active:scale-95 text-white px-2 py-1.5 rounded-md inline-block text-sm">
-                          {category?.name}
-                        </Link>
-                      ))}
+                      <div className='max-w-[600px] mx-auto md:mx-0'>
+                        <div className="flex flex-wrap md:justify-start justify-center gap-4 mt-10 mb-5">
+                          {manga?.categories?.map((category, index) => (
+                            <Link prefetch={false} key={index} href={`${DOMAIN}/categories/${category?.slug}?page=1`} className="bg-[black] border border-[#2e2e2e] hover:bg-[#2c2b2b] hover:scale-110 transition-transform active:scale-95 text-white px-2 py-1.5 rounded-md inline-block text-sm">
+                              {category?.name}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+
+                      <Link prefetch={false} href={`${DOMAIN}/manga/${manga?.slug}`} className="flex justify-center md:block mb-5 mt-7">
+                        <div className="bg-[black] border border-[#2e2e2e] hover:bg-[#2c2b2b] text-white px-3 py-2 w-[160px] rounded hover:scale-110 transition-transform active:scale-95 text-[15px]">
+
+                          <div className="flex gap-3 items-center">
+                            <div className='font-bold tracking-wider text-[14px]'>Start Reading</div>
+                            <div><FaArrowAltCircleRight /></div>
+                          </div>
+                        </div>
+                      </Link>
+
                     </div>
                   </div>
-
-                  <Link prefetch={false} href={`${DOMAIN}/manga/${manga?.slug}`} className="flex justify-center md:block mb-5 mt-7">
-                    <div className="bg-[black] border border-[#2e2e2e] hover:bg-[#2c2b2b] text-white px-3 py-2 w-[160px] rounded hover:scale-110 transition-transform active:scale-95 text-[15px]">
-
-                      <div className="flex gap-3 items-center">
-                        <div className='font-bold tracking-wider text-[14px]'>Start Reading</div>
-                        <div><FaArrowAltCircleRight /></div>
-                      </div>
-                    </div>
-                  </Link>
-
                 </div>
-              </div>
-            </div>
-          </SwiperSlide>))}
-      </Swiper>
-
-
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+      </MyDynamicComp>
 
       <h2 className={`${roboto.className} my-7 font-bold text-2xl tracking-wider text-white text-center px-3`}>Latest Chapters</h2>
       <div className="max-w-[1400px] mx-auto px-2 sm:px-6 lg:px-8 py-4 text-white">
@@ -274,7 +282,7 @@ export default function Home({ mangas, categories, latestmangachapters }) {
 
               </div>
             </div>
-          )).slice(0, 140)}
+          )).slice(0, 1)}
         </div>
       </div>
 
@@ -283,10 +291,10 @@ export default function Home({ mangas, categories, latestmangachapters }) {
 
 
 
-      <div className={`${roboto.className} text-2xl text-center mb-10 text-white font-bold tracking-wider mt-10`}>All Categories</div>
+      {/* <div className={`${roboto.className} text-2xl text-center mb-10 text-white font-bold tracking-wider mt-10`}>All Categories</div> */}
 
 
-      <div className='max-w-[1200px] mx-auto px-5'>
+      {/* <div className='max-w-[1200px] mx-auto px-5'>
         <div className='text-white flex gap-10 flex-wrap justify-center items-center'>
           {categories?.map((category, index) => (
             <Link prefetch={false} key={index} href={`${DOMAIN}/categories/${category.slug}?page=1`} className={`${roboto3.className} bg-[black] border border-[#343434] hover:bg-[#2c2b2b] px-4 py-2 font-bold rounded  text-sm hover:scale-110 transition-transform`}>
@@ -294,7 +302,7 @@ export default function Home({ mangas, categories, latestmangachapters }) {
             </Link>
           ))}
         </div>
-      </div>
+      </div> */}
 
 
 

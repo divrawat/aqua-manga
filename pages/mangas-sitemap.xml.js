@@ -14,7 +14,7 @@ const generateXmlSitemap = (blogs) => {
     xml += `
     <url>
       <loc>${`${DOMAIN}/manga/${blog.slug}`}</loc>
-      <lastmod>${blog.createdAt}</lastmod>
+      // <lastmod>${blog.createdAt}</lastmod>
     </url>`;
   });
 
