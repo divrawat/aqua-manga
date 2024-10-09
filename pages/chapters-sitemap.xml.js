@@ -41,7 +41,7 @@ export async function getServerSideProps() {
         const chunk = chapters.slice(start, end);
 
         const sitemapContent = generateXmlSitemap(chunk);
-        const sitemapPath = path.join(publicDir, `chapter-sitemap${i + 1}.xml`);
+        const sitemapPath = path.join(publicDir, `chapter-sitemapsss${i + 1}.xml`);
 
         // Write the sitemap to the public directory
         fs.writeFileSync(sitemapPath, sitemapContent, 'utf8');
@@ -50,12 +50,10 @@ export async function getServerSideProps() {
     return { props: {} };
 }
 
-export default function Sitemap() {
-    return null;
-}
 
-*/
+
 
 export default function Sitemap() { return null; }
+*/
 
 {/* <lastmod>${blog.createdAt}</lastmod> */ }

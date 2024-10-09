@@ -1,4 +1,4 @@
-/*
+
 import { getMangasSitemap } from '../actions/manga';
 import { DOMAIN } from "../config";
 import fs from 'fs';
@@ -14,7 +14,6 @@ const generateXmlSitemap = (blogs) => {
     xml += `
     <url>
       <loc>${`${DOMAIN}/manga/${blog.slug}`}</loc>
-      // <lastmod>${blog.createdAt}</lastmod>
     </url>`;
   });
 
@@ -47,13 +46,11 @@ export async function getServerSideProps() {
   return { props: {} };
 }
 
-export default function Sitemap() {
-  return null;
-}
-*/
 
 
 
 export default function Sitemap() { return null; }
 
 
+
+// */

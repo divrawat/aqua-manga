@@ -1,5 +1,5 @@
 User-agent: *
 Disallow: /admin/
 
-Sitemap: https://abc.com/chapter-sitemap1.xml
-Sitemap: https://abc.com/manga-sitemap.xml
+Sitemap: https://coffee-manga.online/manga-sitemap.xml
+Sitemap: https://coffee-manga.online/chapter-sitemap1.xml

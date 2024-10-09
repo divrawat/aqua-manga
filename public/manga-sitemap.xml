@@ -1,8 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
   <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
+   <url>
+      <loc>https://coffee-manga.online</loc>
+    </url>
+    <url>
+      <loc>https://coffee-manga.online/manga/i-parry-everything</loc>
+    </url>
+    <url>
+      <loc>https://coffee-manga.online/manga/heroes-demons-villains</loc>
+    </url>
+    <url>
+      <loc>https://coffee-manga.online/manga/the-ossan-newbie-adventurer</loc>
+    </url>
+    <url>
+      <loc>https://coffee-manga.online/manga/secret-class</loc>
+    </url>
+    <url>
+      <loc>https://coffee-manga.online/manga/hunter-x-hunter</loc>
+    </url>
     <url>
       <loc>https://coffee-manga.online/manga/ichi-the-witch</loc>
     </url>
-
-  </urlset>
+    <url>
+      <loc>https://coffee-manga.online/manga/tokyo-revengers</loc>
+    </url></urlset>
