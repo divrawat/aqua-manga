@@ -1,4 +1,4 @@
-
+/*
 import { getMangasSitemap } from '../actions/manga';
 import { DOMAIN } from "../config";
 import fs from 'fs';
@@ -47,7 +47,7 @@ export async function getServerSideProps() {
 }
 
 
-
+*/
 
 export default function Sitemap() { return null; }
 
