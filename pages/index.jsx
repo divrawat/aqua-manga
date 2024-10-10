@@ -86,7 +86,7 @@ export default function Home({ mangas, categories, latestmangachapters }) {
     router.push(`/search?manganame=${query}`);
   };
 
-  const DESCRIPTION = `Manga Chimp is your ultimate hub for discovering and enjoying a wide range of manga, manhwa, and manhua. Explore the latest releases, read for free, and enjoy high-quality images with personalized recommendations.`
+  const DESCRIPTION = `Coffee Manga is your ultimate hub for discovering and enjoying a wide range of mangas, manhwas, and manhuas. Explore the latest releases, read for free, and enjoy high-quality images with personalized recommendations.`
 
   const schema = {
     "@context": "https://schema.org",
