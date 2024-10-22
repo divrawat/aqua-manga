@@ -196,7 +196,7 @@ export default function Home({ mangas, categories, latestmangachapters }) {
       </h1>
 
 
-      <MyDynamicComp>
+      {/* <MyDynamicComp>
         <div>
           <Swiper loop={true} centeredSlides={true}
             autoplay={{ delay: 2500, disableOnInteraction: false }}
@@ -248,7 +248,7 @@ export default function Home({ mangas, categories, latestmangachapters }) {
             ))}
           </Swiper>
         </div>
-      </MyDynamicComp>
+      </MyDynamicComp> */}
 
       <h2 className={`${roboto.className} my-7 font-bold text-2xl tracking-wider text-white text-center px-3`}>Latest Chapters</h2>
       <div className="max-w-[1400px] mx-auto px-2 sm:px-6 lg:px-8 py-4 text-white">
@@ -282,7 +282,7 @@ export default function Home({ mangas, categories, latestmangachapters }) {
 
               </div>
             </div>
-          )).slice(0, 6)}
+          )).slice(0, 1)}
         </div>
       </div>
 
