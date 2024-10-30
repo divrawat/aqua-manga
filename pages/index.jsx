@@ -282,7 +282,7 @@ export default function Home({ mangas, categories, latestmangachapters }) {
 
               </div>
             </div>
-          )).slice(0, 1)}
+          )).slice(0, 25)}
         </div>
       </div>
 
