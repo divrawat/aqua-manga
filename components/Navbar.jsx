@@ -29,13 +29,13 @@ export default function Navbar() {
                 </div>
 
                 <div className="md:pb-0  md:mt-0 md:pr-4  md:bg-transparent ">
-                    {/* <ul id="menu" ref={menuRef} className="md:flex flex-wrap md:space-x-5 md:pb-0 pb-4 items-center font-bold  text-center leading-[3] hidden">
+                    <ul id="menu" ref={menuRef} className="md:flex flex-wrap md:space-x-5 md:pb-0 pb-4 items-center font-bold  text-center leading-[3] hidden">
                         {navLinks.map((link, index) => (
                             <li key={index}>
                                 <Link prefetch={false} href={link.href} className={`${roboto.className} hover:text-blue-300 tracking-wider text-[11px] font-bold hover:underline uppercase`}>{link.text}</Link>
                             </li>
                         ))}
-                    </ul> */}
+                    </ul>
                 </div>
             </div>
         </nav>
