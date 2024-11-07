@@ -106,141 +106,35 @@ export default function Chapter({ errorcode, manga, chapterArray, chapterData })
     // useEffect(() => { setChaptersArray(chapterArray); }, [manga?.slug]);
 
     const router = useRouter();
-    const DESCRIPTION = `Read ${manga?.name} chapter ${chapterData?.chapterNumber} online. ${manga?.name} ${manga?.type} chapters are always updated at ${APP_NAME}.`;
+    const DESCRIPTION = `Read ${manga?.name} chapter ${chapterData?.chapterNumber} online. ${manga?.description}`;
+
 
 
     const schema = {
         "@context": "https://schema.org",
-        "@graph": [
-            {
-                "@type": ["Person", "Organization"],
-                "@id": `${DOMAIN}/#person`,
-                "name": `${APP_NAME}`,
-                "sameAs": ["https://x.com/divrawat2001"],
-                "logo": {
-                    "@type": "ImageObject",
-                    "@id": `${DOMAIN}/#logo`,
-                    "url": `${APP_LOGO}`,
-                    "contentUrl": `${APP_LOGO}`,
-                    "caption": `${APP_NAME}`,
-                    "inLanguage": "en-US",
-                    "width": "80",
-                    "height": "80"
-                },
-                "image": {
-                    "@type": "ImageObject",
-                    "@id": `${DOMAIN}/#logo`,
-                    "url": `${APP_LOGO}`,
-                    "contentUrl": `${APP_LOGO}`,
-                    "caption": `${APP_NAME}`,
-                    "inLanguage": "en-US",
-                    "width": "80",
-                    "height": "80"
-                }
-            },
-            {
-                "@type": "WebSite",
-                "@id": `${DOMAIN}/#website`,
-                "url": `${DOMAIN}`,
-                "name": `${APP_NAME}`,
-                "publisher": {
-                    "@id": `${DOMAIN}/#person`
-                },
-                "inLanguage": "en-US"
-            },
-            {
-                "@type": "BreadcrumbList",
-                "@id": `${DOMAIN}/manga/${manga?.slug}/chapter-${chapterData?.chapterNumber}/#breadcrumb`,
-                "itemListElement": [
-                    {
-                        "@type": "ListItem",
-                        "position": 1,
-                        "item": {
-                            "@id": `${DOMAIN}`,
-                            "name": "Home"
-                        }
-                    },
-                    {
-                        "@type": "ListItem",
-                        "position": 2,
-                        "item": {
-                            "@id": `${DOMAIN}/manga/${manga?.slug}`,
-                            "name": `${manga?.name}`
-                        }
-                    },
-                    {
-                        "@type": "ListItem",
-                        "position": 3,
-                        "item": {
-                            "@id": `${DOMAIN}/manga/${manga?.slug}/chapter-${chapterData?.chapterNumber}/`,
-                            "name": `${manga?.name} Chapter ${chapterData?.chapterNumber}`
-                        }
-                    }
-                ]
-            },
-            {
-                "@type": "WebPage",
-                "@id": `${DOMAIN}/manga/${manga?.slug}/chapter-${chapterData?.chapterNumber}/#webpage`,
-                "url": `${DOMAIN}/manga/${manga?.slug}/chapter-${chapterData?.chapterNumber}`,
-                "name": `${manga?.name} Chapter ${chapterData?.chapterNumber}`,
-                "datePublished": `${chapterData?.createdAt}`,
-                "dateModified": `${chapterData?.createdAt}`,
-                "isPartOf": {
-                    "@id": `${DOMAIN}/#website`
-                },
-                "primaryImageOfPage": {
-                    "@id": `${IMAGES_SUBDOMAIN}/${manga?.slug}/chapter-${chapterData?.chapterNumber}/1.webp`
-                },
-                "inLanguage": "en-US",
-                "breadcrumb": {
-                    "@id": `${DOMAIN}/manga/${manga?.slug}/chapter-${chapterData?.chapterNumber}/#breadcrumb`
-                }
-            },
-            {
-                "@type": "Person",
-                "@id": `${DOMAIN}/manga/${manga?.slug}/chapter-${chapterData?.chapterNumber}/#author`,
-                "image": {
-                    "@type": "ImageObject",
-                    "@id": "https://secure.gravatar.com/avatar/?s=96&d=mm&r=g",
-                    "url": "https://secure.gravatar.com/avatar/?s=96&d=mm&r=g",
-                    "inLanguage": "en-US"
-                }
-            },
-            {
-                "@type": "BlogPosting",
-                "headline": `${manga?.name} Chapter ${chapterData?.chapterNumber}`,
-                "datePublished": `${chapterData?.createdAt}`,
-                "dateModified": `${chapterData?.createdAt}`,
-                "articleSection": `${manga?.slug}`,
-                "author": {
-                    "@id": `${DOMAIN}/manga/${manga?.slug}/chapter-${chapterData?.chapterNumber}/#author`
-                },
-                "publisher": {
-                    "@id": `${DOMAIN}/#person`
-                },
-                "description": `${DESCRIPTION}`,
-                "name": `${manga?.name} Chapter ${chapterData?.chapterNumber}`,
-                "@id": `${DOMAIN}/manga/${manga?.slug}/chapter-${chapterData?.chapterNumber}/#richSnippet`,
-                "isPartOf": {
-                    "@id": `${DOMAIN}/manga/${manga?.slug}/chapter-${chapterData?.chapterNumber}/#webpage`
-                },
-                "image": {
-                    "@id": `${IMAGES_SUBDOMAIN}/${manga?.slug}/chapter-${chapterData?.chapterNumber}/1.webp`
-                },
-                "inLanguage": "en-US",
-                "mainEntityOfPage": {
-                    "@id": `${DOMAIN}/manga/${manga?.slug}/chapter-${chapterData?.chapterNumber}/#webpage`
-                }
+        "@type": "Article",
+        "headline": `${manga?.name}`,
+        "description": `${manga?.description}`,
+        "author": {
+            "@type": "Person",
+            "name": `${manga?.author}`
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": `${manga?.name}`,
+            "logo": {
+                "@type": "ImageObject",
+                "url": `${APP_LOGO}`
             }
-        ]
-    }
-
-    /*
-    const parseMetaTags = (htmlString) => {
-        if (!htmlString) return null;
-        return parse(htmlString);
+        },
+        "datePublished": `${manga?.createdAt}`,
+        "dateModified": `${manga?.createdAt}`,
+        "image": `${IMAGES_SUBDOMAIN}/${manga?.slug}/cover-image/1.webp`,
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": `${DOMAIN}/series/${manga?.slug}/chapter-${chapterData?.chapterNumber}`
+        }
     };
-    */
 
 
     const head = () => (
@@ -249,26 +143,16 @@ export default function Chapter({ errorcode, manga, chapterArray, chapterData })
             <meta name="description" content={DESCRIPTION} />
             <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large" />
             <meta name="googlebot" content="noarchive" />
-            <link rel="canonical" href={`${DOMAIN}/manga/${manga?.slug}/chapter-${chapterData?.chapterNumber}`} />
+            <link rel="canonical" href={`${DOMAIN}/series/${manga?.slug}/chapter-${chapterData?.chapterNumber}`} />
             <meta property="og:title" content={`${manga?.name} Chapter ${chapterData?.chapterNumber}`} />
             <meta property="og:description" content={DESCRIPTION} />
             <meta property="og:type" content="webiste" />
-            <meta property="og:url" content={`${DOMAIN}/manga/${manga?.slug}/chapter-${chapterData?.chapterNumber}`} />
+            <meta property="og:url" content={`${DOMAIN}/series/${manga?.slug}/chapter-${chapterData?.chapterNumber}`} />
             <meta property="og:site_name" content={`${APP_NAME}`} />
-            <meta property="og:image" content={`${IMAGES_SUBDOMAIN}/${manga?.slug}/chapter-${chapterData?.chapterNumber}/1.webp`} />
-            <meta property="og:image:secure_url" content={`${IMAGES_SUBDOMAIN}/${manga?.slug}/chapter-${chapterData?.chapterNumber}/1.webp`} />
+            <meta property="og:image" content={`${IMAGES_SUBDOMAIN}/${manga?.slug}/cover-image/1.webp`} />
+            <meta property="og:image:secure_url" content={`${IMAGES_SUBDOMAIN}/${manga?.slug}/cover-image/1.webp`} />
             <meta property="og:image:type" content="image/webp" />
-            <meta name="twitter:card" content="summary_large_image" />
-            <meta name="twitter:title" content={`${manga?.name} Chapter ${chapterData?.chapterNumber}`} />
-            <meta name="twitter:description" content={DESCRIPTION} />
-            <meta name="twitter:site" content="@mangachimp" />
-            <meta name="twitter:creator" content="@mangachimp" />
-            <meta name="twitter:image" content={`${IMAGES_SUBDOMAIN}/${manga?.slug}/cover-image/1.webp`} />
-            <meta name="twitter:label1" content="Written by" />
-            <meta name="twitter:data1" content={`${APP_NAME}`} />
-            <meta name="twitter:label2" content="Time to read" />
-            <meta name="twitter:data2" content="1 minute" />
-            {/* <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} /> */}
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
         </Head>
     );
 
@@ -282,7 +166,7 @@ export default function Chapter({ errorcode, manga, chapterArray, chapterData })
 
 
 
-    const currentChapterUrl = `${DOMAIN}/manga/${manga?.slug}/chapter-${chapterData?.chapterNumber}`;
+    const currentChapterUrl = `${DOMAIN}/series/${manga?.slug}/chapter-${chapterData?.chapterNumber}`;
 
     const [selectedChapter, setSelectedChapter] = useState(currentChapterUrl);
 
@@ -303,7 +187,7 @@ export default function Chapter({ errorcode, manga, chapterArray, chapterData })
 
     const TEXT = `Read ${manga?.type.toLowerCase()} <b>${manga?.name} chapter ${chapterData?.chapterNumber}</b> at ${APP_NAME}.`;
 
-    const postUrl = `${DOMAIN}/manga/${manga?.slug}/chapter-${chapterData?.chapterNumber}`;
+    const postUrl = `${DOMAIN}/series/${manga?.slug}/chapter-${chapterData?.chapterNumber}`;
     const encodedTitle = manga?.name;
     const encodedUrl = postUrl;
 
@@ -312,6 +196,21 @@ export default function Chapter({ errorcode, manga, chapterArray, chapterData })
     const twitterUrl = `https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}`;
     const telegramUrl = `https://t.me/share/url?url=${encodedUrl}&text=${encodedTitle}`;
     const redditUrl = `https://www.reddit.com/submit?url=${encodedUrl}&title=${encodedTitle}`;
+
+    const [chaptersArray, setChaptersArray] = useState([]);
+    useEffect(() => { setChaptersArray(chapterArray); }, [manga?.slug]);
+
+
+    const formatCreatedAt = (isoDateString) => {
+        const date = new Date(isoDateString);
+        const options = {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+        };
+        return date.toLocaleDateString('en-US', options);
+    };
+
 
     return (
         <>
@@ -324,22 +223,22 @@ export default function Chapter({ errorcode, manga, chapterArray, chapterData })
                     <div className='flex justify-center flex-wrap items-center gap-2 px-3 text-[13px] mb-6 text-blue-300'>
 
                         <div className='flex items-center gap-2'>
-                            <div><FaHome /></div>
+                            {/* <div><FaHome /></div> */}
                             <div><Link prefetch={false} href={`${DOMAIN}`}>Home</Link></div>
                         </div>
 
                         <div>{`->`}</div>
 
                         <div className='flex items-center gap-2'>
-                            <div><AiFillChrome /></div>
-                            <div><Link prefetch={false} href={`${DOMAIN}/manga/${manga?.slug}`}>{`${manga?.name}`}</Link></div>
+                            {/* <div><AiFillChrome /></div> */}
+                            <div><Link prefetch={false} href={`${DOMAIN}/series/${manga?.slug}`}>{`${manga?.name}`}</Link></div>
                         </div>
 
                         <div>{`->`}</div>
 
                         <div className='flex items-center gap-2'>
-                            <div><GiBlackBook /></div>
-                            <div><Link prefetch={false} href={`${DOMAIN}/manga/${manga?.slug}/chapter-${chapterData?.chapterNumber}`}>{` Chapter ${chapterData?.chapterNumber}`}</Link></div>
+                            {/* <div><GiBlackBook /></div> */}
+                            <div><Link prefetch={false} href={`${DOMAIN}/series/${manga?.slug}/chapter-${chapterData?.chapterNumber}`}>{` Chapter ${chapterData?.chapterNumber}`}</Link></div>
                         </div>
 
                     </div>
@@ -375,17 +274,18 @@ export default function Chapter({ errorcode, manga, chapterArray, chapterData })
 
                     </div>
 
-
-
-
                     <div>
-                        <p style={{ wordSpacing: "2px" }} className={`${roboto2.className} tracking-wider rounded-md  max-w-[1000px] mx-auto px-3 py-5 mb-4 text-[13.5px] text-white text-center`} dangerouslySetInnerHTML={{ __html: TEXT }} />
+                        <p style={{ wordSpacing: "2px" }} className={`${roboto2.className} tracking-wider rounded-md  max-w-[1000px] mx-auto px-3 py-5 mb-2 text-[13.5px] text-white text-center`} dangerouslySetInnerHTML={{ __html: TEXT }} />
                     </div>
+
+                    <div className="text-white text-center text-[11px]">{formatCreatedAt(manga?.createdAt)}</div>
+
+
 
                     <div className='mx-3  px-1 pb-5'>
                         <div className="flex justify-between max-w-[800px] items-center mx-auto md:pb-[50px] mt-5">
                             {prevChapter !== null ? (
-                                <Link prefetch={false} href={`${DOMAIN}/manga/${manga?.slug}/chapter-${prevChapter}`}>
+                                <Link prefetch={false} href={`${DOMAIN}/series/${manga?.slug}/chapter-${prevChapter}`}>
                                     <button className="text-[black] font-bold text-[13px] hover:scale-105 active:scale-95 transition-transform rounded bg-[white] px-2 py-1.5">
                                         <div className='flex items-center gap-2 justify-center'>
                                             <div className='pt-[1.5px]'><FaArrowAltCircleLeft /></div>
@@ -407,8 +307,8 @@ export default function Chapter({ errorcode, manga, chapterArray, chapterData })
                                 <select value={selectedChapter} onChange={handleChange}
                                     className="bg-[white] cursor-pointer border border-gray-300 text-gray-900 text-[13.5px] rounded-lg block w-full p-1.5"
                                 >
-                                    {chapterArray?.map((chapter, index) => (
-                                        <option className='cursor-pointer' key={index} value={`${DOMAIN}/manga/${manga?.slug}/chapter-${chapter}`}
+                                    {chaptersArray?.map((chapter, index) => (
+                                        <option className='cursor-pointer' key={index} value={`${DOMAIN}/series/${manga?.slug}/chapter-${chapter}`}
                                         >
                                             {`Chapter ${chapter}`}
                                         </option>
@@ -419,7 +319,7 @@ export default function Chapter({ errorcode, manga, chapterArray, chapterData })
 
 
                             {nextChapter !== null ? (
-                                <Link prefetch={false} href={`${DOMAIN}/manga/${manga?.slug}/chapter-${nextChapter}`}>
+                                <Link prefetch={false} href={`${DOMAIN}/series/${manga?.slug}/chapter-${nextChapter}`}>
                                     <button className="text-[black] text-[13px] hover:scale-105 active:scale-95 transition-transform rounded
                                  bg-[white] px-2 py-1.5 font-bold">
                                         <div className='flex items-center gap-2 justify-center'>
@@ -455,7 +355,7 @@ export default function Chapter({ errorcode, manga, chapterArray, chapterData })
                     {/* <div className='py-10 bg-gray-900'>
                         <h2 className='text-4xl text-center text-[white] font-blod px-4 mb-10'>Comment Section</h2>
                         <section className='max-w-[1000px] mx-auto px-5'>
-                            <DisqusComments url={`/manga/${manga?.slug}/chapter-${chapterData?.chapterNumber}`} identifier={`${DOMAIN}/manga/${manga?.slug}/chapter-${chapterData?.chapterNumber}`} title={`${manga?.name} Chapter ${chapterData?.chapterNumber}`} />
+                            <DisqusComments url={`/series/${manga?.slug}/chapter-${chapterData?.chapterNumber}`} identifier={`${DOMAIN}/series/${manga?.slug}/chapter-${chapterData?.chapterNumber}`} title={`${manga?.name} Chapter ${chapterData?.chapterNumber}`} />
                         </section>
                     </div> */}
 
@@ -465,7 +365,7 @@ export default function Chapter({ errorcode, manga, chapterArray, chapterData })
                         <div className="flex justify-center sm:gap-10 gap-3 flex-wrap pb-10 px-3">
                             {relatedMangas?.map((manga, index) => (
                                 <div className="hover:scale-110 transition-transform text-white rounded shadow sm:w-[200px] w-[45%]" key={index}>
-                                    <Link prefetch={false} href={`${DOMAIN}/manga/${manga?.slug}`}>
+                                    <Link prefetch={false} href={`${DOMAIN}/series/${manga?.slug}`}>
                                         <img src={`${IMAGES_SUBDOMAIN}/${manga?.slug}/cover-image/1.webp`} alt={`${manga?.name} Cover`} className="mb-2 sm:h-[230px] sm:w-[200px] w-full h-[200px] object-cover " />
                                         <div className='px-2 py-3'>
                                             <p className="sm:text-[11.5px] text-[9px] mb-1 font-bold">{` Total Chapters:  ${manga?.chapterCount}`}</p>

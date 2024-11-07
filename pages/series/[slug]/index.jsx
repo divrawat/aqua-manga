@@ -43,7 +43,6 @@ const roboto2 = Rubik({ subsets: ['latin'], weight: '600', });
 const roboto3 = Rubik({ subsets: ['latin'], weight: '300', });
 import dynamic from 'next/dynamic';
 const DisqusComments = dynamic(() => import('@/components/DisQus'), { ssr: false });
-
 const MyDynamicComp = dynamic(() => import('@/components/MyDynamicComp'), { ssr: false });
 
 // import React from 'react';
@@ -130,7 +129,7 @@ const MangaPage = ({ errorcode, manga, chapterArray }) => {
             },
             {
                 "@type": "BreadcrumbList",
-                "@id": `${DOMAIN}/manga/${mangaurl}/#breadcrumb`,
+                "@id": `${DOMAIN}/series/${mangaurl}/#breadcrumb`,
                 "itemListElement": [
                     {
                         "@type": "ListItem",
@@ -152,8 +151,8 @@ const MangaPage = ({ errorcode, manga, chapterArray }) => {
             },
             {
                 "@type": "WebPage",
-                "@id": `${DOMAIN}/manga/${mangaurl}/#webpage`,
-                "url": `${DOMAIN}/manga/${mangaurl}/#webpage`,
+                "@id": `${DOMAIN}/series/${mangaurl}/#webpage`,
+                "url": `${DOMAIN}/series/${mangaurl}/#webpage`,
                 "name": `${manga?.manga?.name} ${manga?.manga?.type}`,
                 "datePublished": `${manga?.manga?.createdAt}`,
                 "dateModified": `${manga?.manga?.createdAt}`,
@@ -165,17 +164,7 @@ const MangaPage = ({ errorcode, manga, chapterArray }) => {
                 },
                 "inLanguage": "en-US",
                 "breadcrumb": {
-                    "@id": `${DOMAIN}/manga/${mangaurl}/#breadcrumb`
-                }
-            },
-            {
-                "@type": "Person",
-                "@id": `${DOMAIN}/manga/${mangaurl}/#author`,
-                "image": {
-                    "@type": "ImageObject",
-                    "@id": "https://secure.gravatar.com/avatar/?s=96&amp;d=mm&amp;r=g",
-                    "url": "https://secure.gravatar.com/avatar/?s=96&amp;d=mm&amp;r=g",
-                    "inLanguage": "en-US"
+                    "@id": `${DOMAIN}/series/${mangaurl}/#breadcrumb`
                 }
             },
             {
@@ -185,14 +174,14 @@ const MangaPage = ({ errorcode, manga, chapterArray }) => {
                 "dateModified": `${manga?.manga?.createdAt}`,
                 "articleSection": categoryNames,
                 "author": {
-                    "@id": `${DOMAIN}/manga/${mangaurl}/#author`
+                    "@id": `${DOMAIN}/series/${mangaurl}/#author`
                 },
                 "publisher": {
                     "@id": `${DOMAIN}/#person`
                 },
                 "description": `${manga?.manga?.description}`,
                 "name": `${manga?.manga?.name} ${manga?.manga?.type}`,
-                "@id": `${DOMAIN}/manga/${mangaurl}/#richSnippet`,
+                "@id": `${DOMAIN}/series/${mangaurl}/#richSnippet`,
                 "isPartOf": {
                     "@id": `${DOMAIN}/${mangaurl}/#webpage`
                 },
@@ -201,7 +190,7 @@ const MangaPage = ({ errorcode, manga, chapterArray }) => {
                 },
                 "inLanguage": "en-US",
                 "mainEntityOfPage": {
-                    "@id": `${DOMAIN}/manga/${mangaurl}/#webpage`
+                    "@id": `${DOMAIN}/series/${mangaurl}/#webpage`
                 }
             }
         ]
@@ -209,46 +198,25 @@ const MangaPage = ({ errorcode, manga, chapterArray }) => {
 
     const DESCRIPTION = `Read ${manga?.manga?.name} ${manga?.manga?.type} online. ${manga?.manga?.description}`;
 
-    /*
-    const parseMetaTags = (htmlString) => {
-        if (!htmlString) return null;
-        return parse(htmlString);
-    };
-    */
 
     const head = () => (
         <Head>
-            <title>{`${manga?.manga?.name} ${manga?.manga?.type}`}</title>
+            <title>{`${manga?.manga?.name}`}</title>
             <meta name="description" content={DESCRIPTION} />
             <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large" />
-            {/* {metatags?.map((metaTag, index) => (
-                <React.Fragment key={index}>
-                    {parseMetaTags(metaTag.content)}
-                </React.Fragment>
-            ))} */}
             <meta name="googlebot" content="noarchive" />
             <meta property="og:locale" content="en_US" />
             <meta property="og:type" content="article" />
-            <link rel="canonical" href={`${DOMAIN}/manga/${mangaurl}`} />
-            <meta property="og:title" content={`${manga?.manga?.name} ${manga?.manga?.type}`} />
+            <link rel="canonical" href={`${DOMAIN}/series/${mangaurl}`} />
+            <meta property="og:title" content={`${manga?.manga?.name}`} />
             <meta property="og:description" content={DESCRIPTION} />
             <meta property="og:type" content="webiste" />
-            <meta property="og:url" content={`${DOMAIN}/manga/${mangaurl}`} />
+            <meta property="og:url" content={`${DOMAIN}/series/${mangaurl}`} />
             <meta property="og:site_name" content={`${APP_NAME}`} />
             <meta property="og:image" content={`${IMAGES_SUBDOMAIN}/${manga?.manga?.slug}/cover-image/1.webp`} />
             <meta property="og:image:secure_url" content={`${IMAGES_SUBDOMAIN}/${manga?.manga?.slug}/cover-image/1.webp`} />
             <meta property="og:image:type" content="image/webp" />
-            <meta name="twitter:card" content="summary_large_image" />
-            <meta name="twitter:title" content={`${manga?.manga?.name} ${manga?.manga?.type}: ${APP_NAME}`} />
-            <meta name="twitter:description" content={DESCRIPTION} />
-            <meta name="twitter:site" content="@mangachimp" />
-            <meta name="twitter:creator" content="@mangachimp" />
-            <meta name="twitter:image" content={`${IMAGES_SUBDOMAIN}/${manga?.manga?.slug}/cover-image/1.webp`} />
-            <meta name="twitter:label1" content="Written by" />
-            <meta name="twitter:data1" content={`${APP_NAME}`} />
-            <meta name="twitter:label2" content="Time to read" />
-            <meta name="twitter:data2" content="1 minute" />
-            {/* <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} /> */}
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
         </Head >
     );
 
@@ -324,15 +292,15 @@ const MangaPage = ({ errorcode, manga, chapterArray }) => {
                     <div className='flex justify-center text-[13px] px-4 flex-wrap items-center gap-3 mb-10 text-blue-300'>
 
                         <div className='flex items-center gap-2'>
-                            <div><FaHome /></div>
+                            {/* <div><FaHome /></div> */}
                             <div><Link prefetch={false} href={`${DOMAIN}`}>Home</Link></div>
                         </div>
 
                         <div>{`->`}</div>
 
                         <div className='flex items-center gap-2'>
-                            <div><AiFillChrome /></div>
-                            <div><Link prefetch={false} href={`${DOMAIN}/manga/${mangaurl}`}>{`${manga?.manga?.name}`}</Link></div>
+                            {/* <div><AiFillChrome /></div> */}
+                            <div><Link prefetch={false} href={`${DOMAIN}/series/${mangaurl}`}>{`${manga?.manga?.name}`}</Link></div>
                         </div>
 
                     </div>
@@ -343,11 +311,11 @@ const MangaPage = ({ errorcode, manga, chapterArray }) => {
 
                             {chapterArray?.map((chapternumber, index) => (
                                 <div className="flex hover:scale-105 active:scale-95 transition-transform my-1" key={index}>
-                                    <Link prefetch={false} href={`${DOMAIN}/manga/${mangaurl}/chapter-${chapternumber?.chapterNumber}`} className="sm:p-5 p-2  hover:underline text-white bg-black hover:bg-[#2c2b2b] border border-[#292828] rounded sm:w-[180px] w-[100px]">
+                                    <Link prefetch={false} href={`${DOMAIN}/series/${mangaurl}/chapter-${chapternumber?.chapterNumber}`} className="sm:p-5 p-2  hover:underline text-white bg-black hover:bg-[#2c2b2b] border border-[#292828] rounded sm:w-[180px] w-[100px]">
                                         <p className="sm:text-[14px] text-[12px] tracking-wider font-semibold">{`Chapter  ${chapternumber?.chapterNumber}`}</p>
-                                        <MyDynamicComp>
-                                            <p className="sm:text-[11px] text-[10px] font-normal pt-1.5">{formatCreatedAt(chapternumber?.createdAt)}</p>
-                                        </MyDynamicComp>
+                                        {/* <MyDynamicComp> */}
+                                        <p className="sm:text-[11px] text-[10px] font-normal pt-1.5">{formatCreatedAt(chapternumber?.createdAt)}</p>
+                                        {/* </MyDynamicComp> */}
                                     </Link>
                                 </div>
                             ))}
@@ -355,13 +323,13 @@ const MangaPage = ({ errorcode, manga, chapterArray }) => {
                     </div>
 
 
-                    <h2 className='md:text-4xl text-2xl font-bold text-center text-[white] font-blod px-4 mb-10 md:mt-[100px] mt-8'>Comment Section</h2>
+                    {/* <h2 className='md:text-4xl text-2xl font-bold text-center text-[white] font-blod px-4 mb-10 md:mt-[100px] mt-8'>Comment Section</h2>
                     <div className='py-10 max-w-[1100px] mx-auto bg-[black] border border-[#1d1c1c] rounded-md'>
 
                         <section className=' mx-auto px-5 '>
-                            <DisqusComments url={`/manga/${mangaurl}`} identifier={mangaurl} title={`${manga?.manga?.name} ${manga?.manga?.type}`} />
+                            <DisqusComments url={`/series/${mangaurl}`} identifier={mangaurl} title={`${manga?.manga?.name} ${manga?.manga?.type}`} />
                         </section>
-                    </div>
+                    </div> */}
 
 
                     {/* <div className="max-w-[1200px] mx-auto mt-10 px-3">
@@ -369,7 +337,7 @@ const MangaPage = ({ errorcode, manga, chapterArray }) => {
                         <div className="flex justify-center sm:gap-10 gap-3 flex-wrap pb-10">
                             {manga?.relatedMangas?.map((manga, index) => (
                                 <div className="bg-[black] hover:scale-110 transition-transform rounded shadow sm:w-[190px] w-[45%] text-white" key={index}>
-                                    <Link prefetch={false} href={`${DOMAIN}/manga/${manga?.slug}`}>
+                                    <Link prefetch={false} href={`${DOMAIN}/series/${manga?.slug}`}>
                                         <img src={`${IMAGES_SUBDOMAIN}/${manga?.slug}/cover-image/1.webp`} alt={`${manga?.name} Cover`} className="mb-2 sm:h-[200px] sm:w-[190px] h-[200px] w-full object-cover" />
                                         <div className='p-3'>
                                             <p className="sm:text-[11px] text-[10px] my-1 py-1  font-semibold">{`Total Chapters:  ${manga?.totalChapters ?? 0}`}</p>

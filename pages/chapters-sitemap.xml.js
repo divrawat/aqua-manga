@@ -1,5 +1,5 @@
 
-/*
+
 import { getChapterSitemap } from "@/actions/chapter";
 import { DOMAIN } from "../config";
 import slugify from 'slugify';
@@ -17,7 +17,7 @@ const generateXmlSitemap = (blogs) => {
         const slugifiedName = slugify(blog.manganame).toLowerCase();
         xml += `
     <url>
-      <loc>${`${DOMAIN}/manga/${slugifiedName}/chapter-${blog.chapterNumber}`}</loc>
+      <loc>${`${DOMAIN}/series/${slugifiedName}/chapter-${blog.chapterNumber}`}</loc>
     </url>`;
     });
 
@@ -51,7 +51,7 @@ export async function getServerSideProps() {
 }
 
 
-*/
+
 
 export default function Sitemap() { return null; }
 

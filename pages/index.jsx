@@ -86,7 +86,7 @@ export default function Home({ mangas, categories, latestmangachapters }) {
     router.push(`/search?manganame=${query}`);
   };
 
-  const DESCRIPTION = `Manga Chimp is your ultimate hub for enjoying a wide range of mangas, manhwas, and manhuas. Explore the latest releases, read for free, and enjoy high-quality images with personalized recommendations.`
+  const DESCRIPTION = `Aqua Manga is your ultimate hub for enjoying a wide range of mangas, manhwas, and manhuas. Explore the latest releases, read for free, and enjoy high-quality images.`
 
   const schema = {
     "@context": "https://schema.org",
@@ -208,13 +208,13 @@ export default function Home({ mangas, categories, latestmangachapters }) {
                 <div className={`${roboto2.className} bg-[black] max-w-[1150px] shadow mx-auto md:h-[420px] rounded-lg overflow-hidden  text-white border border-[#2c2b2b]`}>
                   <div className="md:flex gap-28 justify-center cursor-pointer">
                     <div className="flex justify-center md:block sm:pt-0 pt-3">
-                      <Link prefetch={false} href={`${DOMAIN}/manga/${manga?.slug}`}>
+                      <Link prefetch={false} href={`${DOMAIN}/series/${manga?.slug}`}>
                         <img src={`${IMAGES_SUBDOMAIN}/${manga?.slug}/cover-image/1.webp`} alt={manga?.fullname} className="hover:scale-105 transition-transform sm:h-[420px] h-[300px]" />
                       </Link>
                     </div>
 
                     <div className="p-4 flex-1">
-                      <Link prefetch={false} href={`${DOMAIN}/manga/${manga?.slug}`}>
+                      <Link prefetch={false} href={`${DOMAIN}/series/${manga?.slug}`}>
                         <h2 className={`${roboto.className} text-2xl font-bold text-center tracking-wider md:text-left`}>{manga?.fullname}</h2>
                       </Link>
 
@@ -231,7 +231,7 @@ export default function Home({ mangas, categories, latestmangachapters }) {
                         </div>
                       </div>
 
-                      <Link prefetch={false} href={`${DOMAIN}/manga/${manga?.slug}`} className="flex justify-center md:block mb-5 mt-7">
+                      <Link prefetch={false} href={`${DOMAIN}/series/${manga?.slug}`} className="flex justify-center md:block mb-5 mt-7">
                         <div className="bg-[black] border border-[#2e2e2e] hover:bg-[#2c2b2b] text-white px-3 py-2 w-[160px] rounded hover:scale-110 transition-transform active:scale-95 text-[15px]">
 
                           <div className="flex gap-3 items-center">
@@ -255,17 +255,17 @@ export default function Home({ mangas, categories, latestmangachapters }) {
         <div className="flex sm:gap-12 gap-3 flex-wrap justify-center">
           {latestmangachapters?.map((manga, index) => (
             <div key={index} className="bg-[black] overflow-hidden shadow rounded-b sm:w-[210px] w-[45%] flex flex-col border border-[#161616] hover:scale-105 transition-transform">
-              <Link prefetch={false} href={`${DOMAIN}/manga/${manga?.slug}`}>
+              <Link prefetch={false} href={`${DOMAIN}/series/${manga?.slug}`}>
                 <img className='sm:w-[210px] sm:h-[250px] h-[190px] object-cover w-full' src={`${IMAGES_SUBDOMAIN}/${manga?.slug}/cover-image/1.webp`} alt={manga?.mangaName} /></Link>
               <div className="px-3 py-5">
-                <Link prefetch={false} href={`${DOMAIN}/manga/${manga?.slug}`}>
+                <Link prefetch={false} href={`${DOMAIN}/series/${manga?.slug}`}>
                   <div className={`${roboto3.className} h-[70px] sm:text-[15px] text-[12px] font-bold pb-3 flex items-center justify-center text-center`}>
                     {manga?.mangaName}
                   </div>
 
                 </Link>
 
-                <Link prefetch={false} href={`${DOMAIN}/manga/${manga?.slug}/chapter-${manga?.latestChapterNumber}`}>
+                <Link prefetch={false} href={`${DOMAIN}/series/${manga?.slug}/chapter-${manga?.latestChapterNumber}`}>
                   <div className='flex justify-between items-center bg-[black] border border-[#353535] sm:px-3 px-1 py-2 rounded-md hover:bg-[#2c2b2b]'>
                     <div><p className="sm:text-[12px] text-[8px] font-semibold rounded  break-words text-wrap">{`Chapter ${manga?.latestChapterNumber ?? 0}`}</p></div>
                     <div><p className='sm:text-[9px] text-[7px]'>{`${manga?.latestChapterDate ?? 0}`}</p></div>
@@ -273,7 +273,7 @@ export default function Home({ mangas, categories, latestmangachapters }) {
                 </Link>
 
 
-                <Link prefetch={false} href={`${DOMAIN}/manga/${manga?.slug}/chapter-${manga?.secondlatestChapterNumber}`}>
+                <Link prefetch={false} href={`${DOMAIN}/series/${manga?.slug}/chapter-${manga?.secondlatestChapterNumber}`}>
                   <div className='flex justify-between items-center bg-[black]  border border-[#353535] sm:px-3 px-2 py-2 rounded-md mt-3 hover:bg-[#2c2b2b] '>
                     <div><p className="sm:text-[12px] text-[8px] font-semibold rounded  break-words text-wrap">{`Chapter ${manga?.secondlatestChapterNumber ?? 0}`}</p></div>
                     <div><p className='sm:text-[9px] text-[7px]'>{`${manga?.secondlatestChapterDate ?? 0}`}</p></div>
@@ -282,7 +282,7 @@ export default function Home({ mangas, categories, latestmangachapters }) {
 
               </div>
             </div>
-          )).slice(0, 25)}
+          )).slice(0, 2)}
         </div>
       </div>
 
@@ -362,7 +362,7 @@ export default function Home({ mangas, categories, latestmangachapters }) {
             {latestmangas?.map((manga, index) => (
               <SwiperSlide key={index}>
                 <div className="hover:scale-110 transition-transform rounded shadow sm:w-[190px] sm:h-[330px] h-[280px] w-[140px]" >
-                  <Link prefetch={false} href={`${DOMAIN}/manga/${manga?.slug}`}>
+                  <Link prefetch={false} href={`${DOMAIN}/series/${manga?.slug}`}>
                     <img src={`${IMAGES_SUBDOMAIN}/${manga?.slug}/cover-image/1.webp`} alt={`${manga?.name} Cover`} className="mb-2 sm:h-[200px] sm:w-[190px] h-[160px] w-[140px] object-cover" />
                     <div className=' px-2 py-3 text-white'>
                       <p className='sm:text-[12px] font-bold text-[9px] pb-1.5'>{`Total Chapters:  ${manga?.totalChapters ?? 0}`}</p>
