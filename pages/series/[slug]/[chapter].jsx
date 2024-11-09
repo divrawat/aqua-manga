@@ -345,8 +345,12 @@ export default function Chapter({ errorcode, manga, chapterArray, chapterData })
 
 
                     {images?.map((imageSrc, index) => (
-                        <div className='allimages' key={index}>
-                            <img key={index} src={imageSrc} alt={`${manga?.name} Chapter ${chapterData?.chapterNumber} Image ${index + 1}`} />
+                        <div className='allimages' key={index} >
+                            <div>
+                                <p className={`${roboto.className} font-bold text-[20px] text-white text-center mb-4`}>{`Chapter ${chapterData?.chapterNumber} - Image ${index + 1}`}</p>
+                                <img key={index} src={imageSrc} alt={`${manga?.name} Chapter ${chapterData?.chapterNumber} Image ${index + 1}`} />
+
+                            </div>
                         </div>
                     ))}
 
