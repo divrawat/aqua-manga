@@ -15,7 +15,8 @@ export const DISQUS_SHORTNAME = "my-cms-7";
 export const APP_NAME = 'Aqua Manga';
 export const NavbarName = "Aqua Manga";
 
-export const APP_LOGO = `${IMAGES_SUBDOMAIN}/public/logo.webp`;
+// export const APP_LOGO = `${IMAGES_SUBDOMAIN}/public/logo.webp`;
+export const APP_LOGO = `${DOMAIN}/logo.webp`;
 export const NOT_FOUND_IMAGE = `${IMAGES_SUBDOMAIN}/public/404.webp`;
 export const FAVICON = `${IMAGES_SUBDOMAIN}/public/favicon.png`;
 
